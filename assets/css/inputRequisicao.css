@@ -91,3 +91,7 @@ input, select{
     color: #ffffff;
     font-size: 14px;
 }
+
+#cargoSugestoes{
+    display: none;
+}
