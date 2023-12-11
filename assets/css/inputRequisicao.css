@@ -1,93 +1,117 @@
-input, select{
-    border-color: #CDCDCD;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 2px;
-    height: 25px;
+input,
+select {
+  border-color: #cdcdcd;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  height: 25px;
 }
 
-.chkPrioridade{
-    display: inline;
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
+.chkPrioridade {
+  display: inline;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
 }
 
-:checked{
-    transition-duration: 1000ms;  
-    width: 20px;
-    height: 20px;
+:checked {
+  transition-duration: 1000ms;
+  width: 20px;
+  height: 20px;
 }
 
-.grupoInput span{
-    font-size: 16px;
-}
-#idDepartamento{
-    width: 60px;
-}
-#departamento{
-    width: 450px;
-}
-#dataRequisicao{
-    width: 120px;
-}
-#idFuncionario{
-    width: 60px;
-}
-#NomeFuncionario{
-    width: 450px;
-}
-#cargo{
-    width: 120px;
-}
-#categoriaMotivo{
-    width: 130px;
-}
-#Motivo{
-    width: 200px;
-}
-.grupo9{
-    width: 250px;
+.grupoInput {
+  display: flex;
 }
 
-.camposItens span{
-    font-size: 16px;
-}
-.grupoProduto{
-    width: 90px;
-    margin-right: 5px;
-
-}
-.grupoProduto input{
-    width: 90px;
+.grupoInput span {
+  font-size: 16px;
 }
 
-.grupoProdutoDescricao{
-    width: 300px;
-    margin-right: 5px;
-}
-.grupoProdutoDescricao input{
-    width: 300px;
-}
-.grupoEstoque{
-    width: 80px;
-}
-.grupoEstoque input{
-    width: 80px;
+#inpNumero {
+  max-width: 6rem;
+  height: 20px;
+  width: 100%;
 }
 
-.BtnInserirItens{
-    background-color:#0095C5 ;
-    width: 100px;
-    height: 30px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center ;
-    cursor: pointer;
-
+#idDepartamento {
+  width: 6.25rem;
 }
-.BtnInserirItens span{
-    color: #ffffff;
-    font-size: 14px;
+#departamento {
+  width: 25rem;
+}
+#dataRequisicao {
+  width: 7.5rem;
+}
+#idFuncionario {
+  max-width: 6.25rem;
+
+  width: 100%;
+}
+#NomeFuncionario {
+  width: 25rem;
+}
+#cargo {
+  max-width: 7.5rem;
+  width: 100%;
+}
+#categoriaMotivo {
+  width: 9rem;
+}
+#Motivo {
+  width: 11.25rem;
+}
+
+.radioPrioridade {
+  width: 13rem;
+}
+
+.camposItens span {
+  font-size: 16px;
+}
+.grupoProduto {
+  width: 30%;
+  margin-right: 5px;
+}
+.grupoProduto input {
+  width: 100%;
+}
+
+.grupoProdutoDescricao {
+  margin-right: 5px;
+  width: 50%;
+}
+.grupoProdutoDescricao input {
+  width: 100%;
+  width: 100%;
+}
+.grupoEstoque {
+  width: 2rem;
+  width: 20%;
+}
+.grupoEstoque input {
+  width: 5rem;
+  width: 100%;
+}
+
+.grupoBtnInserirItens {
+  width: 15%;
+}
+
+.BtnInserirItens {
+  background-color: #0095c5;
+  width: 100%;
+
+  height: 30px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.BtnInserirItens button {
+  color: #ffffff;
+  background: transparent;
+  border: none;
+  font-size: 14px;
 }

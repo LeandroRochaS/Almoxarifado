@@ -1,157 +1,212 @@
-*{
-    color: #000000;
-    margin:0;
-    padding: 0;
+* {
+  color: #000000;
+  margin: 0;
+  padding: 0;
 }
 
 /* body{
     width: 100vw;
 } */
-.main{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    font-size: 20px;    
-    align-items: center;   
-    justify-content: center;  
-
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
 }
-.header{
-    width: 50vw;
-    height: 5vh;
-    background-color: #15C7FF;   
-    display: flex;
-    align-items: center;
-    padding-left: 1vw;
-    padding-right: 1vw;
-  
+.header {
+  max-width: 710px;
+  width: 100%;
+  height: 5vh;
+  background-color: #15c7ff;
+  display: flex;
+  align-items: center;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  margin-bottom: 1.5vw;
 }
-.header span{
-    color: #ffffff;
+.header span {
+  color: #ffffff;
 }
-.conteudo{
-    /* background-color: yellow; */
-    padding-top: 3vh;
-    width: 50vw;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    border-color:  #CDCDCD;;
-    border-radius: 20px;
-    border-style: solid;
-    flex-wrap: wrap;
-  
-}
-.camposPrincipais{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 3vh;
-    flex-wrap: wrap;
-}
-.linhasCampos{
-    display: flex;
-    flex-direction: row;
-    margin-top: 1vh;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-.grupoInput{
-    display: flex;
-    flex-direction: column;
-    
+.conteudo {
+  /* background-color: yellow; */
+  padding-top: 3vh;
+  max-width: 710px;
+  width: 90%;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border-color: #cdcdcd;
+  border-radius: 20px;
+  border-style: solid;
+  flex-wrap: wrap;
 }
 
-.grupo9{
-    margin-left: 1px;
-    display: flex;
-    justify-content: center;
-
+.camposPrincipais {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  margin-bottom: 3vh;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
-.radioPrioridade{  
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 3px;
-    padding-left: 1px;
-    padding-right: 5px;
-    border-color: #CDCDCD;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
+.linhasCampos {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1vh;
+  justify-content: space-between;
+  align-items: center;
 }
-
-.grupoPrioridade{
-    display: flex;
-    padding-left: 2px;    
+.grupoInput {
+  display: flex;
+  flex-direction: column;
 }
 
-.grupoCategoria{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.grupo9 {
+  margin-left: 1px;
+  display: flex;
+  justify-content: center;
+}
+.radioPrioridade {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 3px;
+  padding-left: 1px;
+  padding-right: 5px;
+  border-color: #cdcdcd;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
 }
 
-.btnAdd{    
-    width: 30px;
-    height: 30px;
-   
-}
-.btnAdd:hover{
-    cursor: pointer; 
-    scale: 1.5;    
-    transition-duration: 1000ms;    
-
+.grupoPrioridade {
+  display: flex;
+  padding-left: 2px;
 }
 
-.grupoMotivo{
-    display: flex;
-    justify-content: center;
-    align-items: center;        
+.grupoCategoria {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.btnAdd {
+  width: 30px;
+  height: 30px;
+}
+.btnAdd:hover {
+  cursor: pointer;
+  scale: 1.5;
+  transition-duration: 1000ms;
+}
+
+.grupoMotivo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dadosPrincipais {
+  border: 1px solid #cdcdcd;
+  border-radius: 8px;
+}
+.titulo {
+  margin-top: 10px;
+  margin-bottom: 2px;
+  font-size: 1.3rem;
 }
 
 /* ITENS */
-.camposItens{
-    display: flex;
-    flex-direction: column;
-    border-color: #CDCDCD;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;    
-    width: 100%;
-    
-}
-.linhaAdicionarItens{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: end;        
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    flex-wrap: wrap;
-}
-.grupoStatusEstoque{
-    display: flex;
-    justify-content: center;
-    align-items: center;  
-    margin-left: 5px;           
-}
-.grupoStatusEstoque img{
-    display: flex;
-    width: 30px;
-    height: 30px;
-}
-.grupoBtnInserirItens{
-    display: flex;
-    justify-content: center;
-    align-items: center;  
-    margin-left: 5px; 
+.itensRequisicao {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  border-color: #cdcdcd;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
 }
 
-.tabelaItens{
-    margin-top: 10px;
+.camposItens {
+  display: flex;
+  flex-direction: column;
+
+  width: 95%;
+  margin: 0 auto;
+}
+.linhaAdicionarItens {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  padding: 2vh 0;
+}
+.grupoStatusEstoque {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+}
+.grupoStatusEstoque img {
+  display: flex;
+  width: 30px;
+  height: 30px;
+}
+.grupoBtnInserirItens {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
 }
 
+.tabelaItens {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  margin: 20px 0;
+  border: 1px solid #cdcdcd;
+}
+.tabelaItens .box-codigo {
+  width: 100px;
+  height: 100px;
+}
+
+.tabelaItens p {
+  font-size: 16px;
+  text-align: center;
+  border-bottom: 1px solid #cdcdcd;
+}
+
+.box-descricao {
+  width: 200px;
+}
+
+.box-descricao p {
+  text-align: left;
+  padding-left: 10px;
+}
+
+.box {
+  border: 1px solid #cdcdcd;
+}
+
+.box-unidade {
+  width: 88px;
+}
+
+.box-unidade p {
+  text-align: left;
+}
+
+.box-prices {
+  width: 130px;
+}
+
+.box-prices p {
+  text-align: left;
+  padding-left: 10px;
+}
