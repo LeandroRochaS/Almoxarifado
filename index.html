@@ -35,7 +35,7 @@
               </div>
               <div class="grupo3 grupoInput">
                 <span>Data</span>
-                <input type="date" id="dataRequisicao" />
+                <input type="date" id="dataRequesicao" />
               </div>
             </div>
             <div class="camposPrincipaisLinha2 linhasCampos">
@@ -45,7 +45,8 @@
               </div>
               <div class="grupo5 grupoInput">
                 <span>Nome Funcionário</span>
-                <input type="text" id="NomeFuncionario" >
+                <input autocomplete="off" type="text" id="NomeFuncionario" >
+                <ul id="searchResults"></ul>
             <img src="/assets/img/image 2.png" alt="lupa">
               </input >
 
@@ -151,7 +152,7 @@
               </div>
               <div class="grupoBtnInserirItens">
                 <div class="BtnInserirItens">
-                  <button type="submit" onclick="validarFormulario()">Adicionar</button>
+                  <button type="submit" onclick="adicionarProduto()">Adicionar</button>
                 </div>
 
               </div>
@@ -162,37 +163,37 @@
               <div class="tabelaItens" >
                 <div class="box box-codigo">
                     <p> Código </p>
-                    <div>
+                    <div id="tabelaCodigo">
 
                     </div>
                 </div>
                 <div class="box box-descricao">
                     <p> Descrição </p>
-                    <div>
+                    <div id="tabelaDescricao">
                         
                     </div>
                 </div>
                 <div class="box box-unidade">
                     <p> Qtd </p>
-                    <div>
+                    <div id="tabelaQuantidade">
                         
                     </div>
                 </div>
                 <div class="box box-unidade">
                     <p> Un </p>
-                    <div>
+                    <div id="tabelaUnidade">
                         
                     </div>
                 </div>
                 <div class="box box-prices">
                     <p> Preço </p>
-                    <div>
+                    <div id="tabelaPreco">
                         
                     </div>
                 </div>
                 <div  class="box box-prices">
                     <p> Total </p>
-                    <div>
+                    <div id="tabelaTotal">
                         
                     </div>
                 </div>
@@ -200,13 +201,24 @@
               <div  class="box-total">
                 <p> Total </p>
                 <div class="box input-total">
-                  1
+                  <p id="totalItens"></p>
                     
                 </div>
             </div>
 
              
 
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="camposObservacao">
+          <div class="camposBtn">
+            <div class="grupoBtn">
+              <button  onclick="salvarRequisicao()">Salvar</button>
+            </div>
+            <div class="grupoBtn">
+              <button  onclick="cancelarRequisicao()">Cancelar</button>
             </div>
           </div>
         </div>
@@ -217,8 +229,8 @@
     </div>
 
 </form>
-    <script src="/assets/scripts/dados.js"></script>
-
+    <script src="/assets/scripts/data/dados.js"></script>
+    <script src="/assets/scripts/validacao.js"></script>
     <script src="/assets/scripts/main.js"></script>
 
   </body>

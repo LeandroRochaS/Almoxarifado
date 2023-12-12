@@ -1,96 +1,73 @@
-function validarFormulario() {
-  console.log("Validando formulário...");
-  event.preventDefault();
-
-  var idDepartamento = document.getElementById("idDepartamento");
-  var departamento = document.getElementById("departamento");
-  var dataRequisicao = document.getElementById("dataRequisicao");
-  var idFuncionario = document.getElementById("idFuncionario");
-  var NomeFuncionario = document.getElementById("NomeFuncionario");
-  var cargo = document.getElementById("cargo");
-  var categoriaMotivo = document.getElementById("categoriaMotivo");
-  var Motivo = document.getElementById("Motivo");
-  var prioridade = document.querySelectorAll(
-    'input[name="prioridade"]:checked'
-  );
-  var CodigoProduto = document.getElementById("CodigoProduto");
-  var DescricaoProduto = document.getElementById("DescricaoProduto");
-  var Estoque = document.getElementById("Estoque");
-  console.log(prioridade.value);
-
-  var inputs = [
-    idDepartamento,
-    departamento,
-    dataRequisicao,
-    idFuncionario,
-    NomeFuncionario,
-    cargo,
-    categoriaMotivo,
-    Motivo,
-    CodigoProduto,
-    DescricaoProduto,
-    Estoque,
-  ];
-
-  inputs.forEach(function (elemento) {
-    if (elemento.value == "" || elemento.value == null) {
-      exibirError(elemento.id);
-    } else {
-      ocultarError(elemento.id);
-    }
-  });
-
-  console.log("Validando campos obrigatórios...");
-
-  if (
-    typeof CodigoProduto.value != "number" ||
-    CodigoProduto.value < 0 ||
-    CodigoProduto.value == null
-  ) {
-    console.log("Código do produto inválido");
-    exibirError("CodigoProduto");
-
-    /*et errorProduto = document.getElementById("grupoProdutoError");
-
-    let pProduto = (document.createElement("p").innerText =
-      "Código do produto inválido");
-    errorProduto.appendChild(pProduto);
-    */
-  }
-
-  if (
-    typeof Estoque.value != "number" ||
-    Estoque.value < 0 ||
-    Estoque.value == null
-  ) {
-    console.log("Código do produto inválido");
-    exibirError("Estoque");
-    /*
-    let errorProduto = document.getElementById("grupoProdutoError");
-
-    let pProduto = (document.createElement("p").innerText =
-      "Código do produto inválido");
-    errorProduto.appendChild(pProduto);
-    */
-  }
-
-  console.log("Formulário validado com sucesso.");
-
-  return true;
-}
-
-function exibirError(idElemento) {
-  const elemento = document.getElementById(idElemento);
-  elemento.style.display = "block";
-  elemento.style.border = "1px solid red";
-}
-
 carregarCategorias();
 
-function ocultarError(idElemento) {
-  const elemento = document.getElementById(idElemento);
-  elemento.style.display = "none";
-  elemento.style.border = "1px solid #ccc";
+document
+  .getElementById("NomeFuncionario")
+  .addEventListener("keyup", encontrarFuncionarios);
+
+document.getElementById("NomeFuncionario").addEventListener("blur", () => {
+  searchResults.innerHTML = "";
+});
+
+function encontrarFuncionarios() {
+  let idDepartamento = document.getElementById("idDepartamento").value;
+  if (idDepartamento == "" || idDepartamento == null) {
+    exibirErro("idDepartamento", "Selecione um departamento");
+    return;
+  }
+
+  const nome = document.getElementById("NomeFuncionario").value;
+  console.log(nome);
+  const filtrarPorDepartamento = funcionarios.filter(
+    (func) => func.idDepartamento == idDepartamento
+  );
+  const results = filtrarPorDepartamento.filter((func) =>
+    func.Nome.toLowerCase().includes(nome.toLowerCase())
+  );
+  displayResults(results);
+}
+
+document.getElementById("idDepartamento").addEventListener("change", () => {
+  let idDepartamento = document.getElementById("idDepartamento").value;
+  if (idDepartamento != "") {
+    carregarDepartamento(idDepartamento);
+  }
+});
+
+function carregarDepartamento(idDepartamento) {
+  var inputDepartamento = document.getElementById("departamento");
+  const departamentoFiltrado = departamentos.filter(
+    (d) => d.idDepartamento == idDepartamento
+  );
+  if (departamentoFiltrado.length == 0) {
+    exibirErro("idDepartamento", "Departamento não encontrado");
+    inputDepartamento.value = "";
+    return;
+  }
+  inputDepartamento.value = departamentoFiltrado[0].Descricao;
+  console.log(inputDepartamento.value);
+  ocultarErro("idDepartamento");
+}
+
+function displayResults(results) {
+  const searchResults = document.getElementById("searchResults");
+  searchResults.innerHTML = "";
+
+  // Exibir novos resultados
+  results.forEach((result) => {
+    const li = document.createElement("li");
+    li.classList.add("result-item");
+    li.textContent = result.Nome;
+    console.log(result);
+
+    li.addEventListener("click", () => {
+      console.log("aqui");
+      document.getElementById("NomeFuncionario").value = result.Nome;
+      document.getElementById("idFuncionario").value = result.idFuncionario;
+      searchResults.innerHTML = "";
+    });
+
+    searchResults.appendChild(li);
+  });
 }
 
 function carregarCategorias() {
@@ -102,7 +79,7 @@ function carregarCategorias() {
   optionFirst.text = "";
   selectCategoria.appendChild(optionFirst);
 
-  categorias.forEach(function (categoria) {
+  getAllCategorias().forEach(function (categoria) {
     let option = document.createElement("option");
     option.value = categoria.idCategoria;
     option.text = categoria.Descricao;
@@ -126,7 +103,7 @@ function carregarMotivos() {
   console.log(valorCategoria);
   console.log(motivosFiltrados);
 
-  motivosFiltrados.forEach(function (motivo) {
+  getAllMotivos().forEach(function (motivo) {
     let option = document.createElement("option");
     option.value = motivo.idMotivo;
     option.text = motivo.Descricao;
@@ -180,3 +157,136 @@ divCorEstoque.addEventListener("mouseover", function () {
 divCorEstoque.addEventListener("mouseout", function () {
   document.querySelector(".modalEstoque").style.display = "none";
 });
+
+const itensDaSecao = [];
+
+function adicionarProduto() {
+  event.preventDefault();
+  const idProduto = document.getElementById("CodigoProduto").value;
+  const produtoFiltrado = produtos.find((p) => p.idProduto == idProduto);
+
+  if (!produtoFiltrado) {
+    alert("Produto não encontrado");
+    return;
+  }
+
+  const descricaoProduto = document.getElementById("DescricaoProduto").value;
+  const quantidade = document.getElementById("Estoque").value; // Suponho que você queira usar o campo Estoque
+  const preco = produtoFiltrado.Preco;
+  const total = quantidade * preco;
+
+  const novoItem = {
+    idProduto,
+    descricaoProduto,
+    quantidade,
+    preco,
+    total,
+  };
+
+  itensDaSecao.push(novoItem);
+
+  let tabelaCodigo = document.getElementById("tabelaCodigo");
+  let tabelaDescricao = document.getElementById("tabelaDescricao");
+  let tabelaQuantidade = document.getElementById("tabelaQuantidade");
+  let tabelaUnidade = document.getElementById("tabelaUnidade");
+  let tabelaPreco = document.getElementById("tabelaPreco");
+  let tabelaTotal = document.getElementById("tabelaTotal");
+
+  // Criar elementos das novas divs
+  const divProduto = document.createElement("p");
+  const divDescricao = document.createElement("p");
+  const divQuantidade = document.createElement("p");
+  const divUnidade = document.createElement("p");
+  const divPreco = document.createElement("p");
+  const divTotal = document.createElement("p");
+
+  divProduto.textContent = idProduto;
+  divDescricao.textContent = descricaoProduto;
+  divQuantidade.textContent = quantidade;
+  divUnidade.textContent = `1`; // Substitua com a unidade real, se aplicável
+  divPreco.textContent = preco;
+  divTotal.textContent = total;
+
+  tabelaCodigo.appendChild(divProduto);
+  tabelaDescricao.appendChild(divDescricao);
+  tabelaQuantidade.appendChild(divQuantidade);
+  tabelaUnidade.appendChild(divUnidade);
+  tabelaPreco.appendChild(divPreco);
+  tabelaTotal.appendChild(divTotal);
+
+  atualizarTotal();
+}
+
+function atualizarTotal() {
+  let total = 0;
+
+  for (const item of itensDaSecao) {
+    total += item.total;
+  }
+  document.getElementById("totalItens").textContent = total;
+}
+
+function salvarRequisicao() {
+  event.preventDefault();
+
+  const idMotivo = document.getElementById("Motivo").value;
+  const motivoFiltrado = motivos.find((m) => m.idMotivo == idMotivo);
+  console.log("passou aqui");
+
+  const idCategoria = document.getElementById("categoriaMotivo").value;
+  const categoriaFiltrada = categorias.find(
+    (c) => c.idCategoria == idCategoria
+  );
+  console.log("passou ali");
+
+  const idProduto = document.getElementById("CodigoProduto").value;
+  const produtoFiltrado = produtos.find((p) => p.idProduto == idProduto);
+  console.log("passou cá");
+
+  const idFuncionario = document.getElementById("idFuncionario").value;
+  console.log(idFuncionario);
+  const funcionarioFiltrado = funcionarios.find(
+    (f) => f.idFuncionario == idFuncionario
+  );
+  console.log("passou lá");
+
+  const nmrRequisisao = document.getElementById("inpNumero").value;
+  console.log(nmrRequisisao);
+
+  const idDepartamento = document.getElementById("idDepartamento").value;
+  console.log(idDepartamento);
+
+  const dataRequesicao = document.getElementById("dataRequesicao").value;
+  console.log(dataRequesicao);
+
+  const nivelDePrioridade = document.querySelector(
+    'input[name="prioridade"]:checked'
+  ).value;
+  console.log(nivelDePrioridade);
+  console.log(funcionarioFiltrado);
+  console.log(categoriaFiltrada);
+  console.log(motivoFiltrado);
+  console.log(nivelDePrioridade);
+  console.log(itensDaSecao);
+
+  const novoPedido = {
+    nmrRequisisao,
+    idDepartamento,
+    dataRequesicao,
+    funcionarioFiltrado,
+    categoriaFiltrada,
+    motivoFiltrado,
+    nivelDePrioridade,
+    itensDaSecao,
+  };
+
+  console.log(novoPedido);
+  alert("Pedido salvo com sucesso!");
+}
+
+function cancelarRequisicao() {
+  event.preventDefault();
+
+  location.reload();
+  alert("Pedido cancelado com sucesso!");
+}

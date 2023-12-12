@@ -57,10 +57,46 @@
   margin-top: 1vh;
   justify-content: space-between;
   align-items: center;
+  max-width: 680px;
 }
 .grupoInput {
   display: flex;
   flex-direction: column;
+}
+
+#searchResults {
+  list-style: none;
+  position: absolute;
+  margin-right: 5px;
+  top: 38.5%;
+  width: 20%;
+
+
+  background: #fffeff;
+
+  z-index: 1;
+
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.bordaSearch {
+  border: 1px solid #cdcdcd;
+  border-radius: 5px;
+}
+
+
+.result-item {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 3px;
+}
+
+.result-item:hover {
+  background: #cdcdcd;
 }
 
 .grupo9 {
@@ -274,6 +310,13 @@
   border-radius: 5px;
   margin-left: 10px;
 }
+
+.error {
+  color: red;
+  font-size: 12px;
+  font-weight: 500;
+}
+
 
 @media screen and (max-width: 600px) {
   .modalEstoque {

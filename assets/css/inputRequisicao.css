@@ -58,6 +58,7 @@ select {
 }
 #categoriaMotivo {
   width: 9rem;
+  display: block;
 }
 #Motivo {
   width: 11.25rem;
