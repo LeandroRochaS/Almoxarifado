@@ -41,7 +41,7 @@ const produtos = [
   {
     idProduto: 2,
     Descricao: "Mel doçe",
-    Estoque: 5,
-    EstoqueMinimo: 5,
+    Estoque: 1,
+    EstoqueMinimo: 15,
   },
 ];
