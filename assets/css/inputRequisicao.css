@@ -51,6 +51,7 @@ select {
 #NomeFuncionario {
   width: 25rem;
 }
+
 #cargo {
   max-width: 7.5rem;
   width: 100%;
@@ -61,7 +62,17 @@ select {
 #Motivo {
   width: 11.25rem;
 }
+.grupo5 {
+  display: flex;
 
+  img {
+    align-self: self-end;
+    position: absolute;
+    top: 225px;
+    margin-right: 5px;
+    width: 15px;
+  }
+}
 .radioPrioridade {
   width: 13rem;
 }
