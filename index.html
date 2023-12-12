@@ -45,7 +45,11 @@
               </div>
               <div class="grupo5 grupoInput">
                 <span>Nome Funcionário</span>
-                <input type="text" id="NomeFuncionario" />
+                <input type="text" id="NomeFuncionario" >
+            <img src="/assets/img/image 2.png" alt="lupa">
+              </input >
+
+            
               </div>
               <div class="grupo6 grupoInput">
                 <span>Cargo</span>
@@ -128,7 +132,21 @@
 
               <div class="grupoStatusEstoque">
                 <div>
-                  <img src="/assets/img/verde.svg" alt="" />
+                  <div id="corEstoque" ></div>
+                  <div class="modalEstoque" >
+                    <div class="modalDiv">
+                      <span class="quadrado modal-verde"></span>
+                      <p id="statusEstoque" >Estoque acima de 10% do Estoque mínimo</p>
+                    </div>
+                    <div class="modalDiv">
+                      <span class="quadrado modal-amarelo"></span>
+                      <p id="statusEstoqueMinimo" >Estoque abaixo de 10% do Estoque mínimo</p>
+                    </div>
+                    <div class="modalDiv">
+                      <span class="quadrado modal-vermelho"></span>
+                      <p id="statusEstoqueMaximo" >Estoque abiaxo do Estoque mínimo</p>
+                      </div>
+                  </div>
                 </div>
               </div>
               <div class="grupoBtnInserirItens">
@@ -140,7 +158,8 @@
 
             </div>
             <div class="grupoProdutoError" >   </div>
-            <div class="tabelaItens">
+            <div >
+              <div class="tabelaItens" >
                 <div class="box box-codigo">
                     <p> Código </p>
                     <div>
@@ -177,6 +196,16 @@
                         
                     </div>
                 </div>
+              </div>
+              <div  class="box-total">
+                <p> Total </p>
+                <div class="box input-total">
+                  1
+                    
+                </div>
+            </div>
+
+             
 
             </div>
           </div>
