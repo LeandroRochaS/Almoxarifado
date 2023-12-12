@@ -85,6 +85,8 @@ function exibirError(idElemento) {
   elemento.style.border = "1px solid red";
 }
 
+carregarCategorias();
+
 function ocultarError(idElemento) {
   const elemento = document.getElementById(idElemento);
   elemento.style.display = "none";
@@ -114,12 +116,12 @@ function carregarMotivos() {
 
   const optionFirst = document.createElement("option");
   optionFirst.value = -1;
-  optionFirst.value = "";
+  optionFirst.text = "";
   selectMotivo.appendChild(optionFirst);
 
   const valorCategoria = document.getElementById("categoriaMotivo");
   const motivosFiltrados = motivos.filter(
-    (m) => m.idCategoria == valorCategoria
+    (m) => m.idCategoria == valorCategoria.value
   );
   console.log(valorCategoria);
   console.log(motivosFiltrados);
@@ -127,10 +129,16 @@ function carregarMotivos() {
   motivosFiltrados.forEach(function (motivo) {
     let option = document.createElement("option");
     option.value = motivo.idMotivo;
-    option.innerText = motivo.Descricao;
-    selectCategoria.add(option);
+    option.text = motivo.Descricao;
+    selectMotivo.add(option);
   });
 }
+
+document
+  .getElementById("categoriaMotivo")
+  .addEventListener("change", function () {
+    carregarMotivos();
+  });
 
 document.getElementById("CodigoProduto").addEventListener("blur", function () {
   const idProduto = document.getElementById("CodigoProduto").value;
@@ -144,12 +152,31 @@ document.getElementById("CodigoProduto").addEventListener("blur", function () {
   document.getElementById("DescricaoProduto").value =
     produtoFiltrado[0].Descricao;
   document.getElementById("Estoque").value = produtoFiltrado[0].Estoque;
+
+  acimaDe10(produtoFiltrado[0].Estoque, produtoFiltrado[0].EstoqueMinimo);
 });
 
-document
-  .getElementById("categoriaMotivo")
-  .addEventListener("change", function () {
-    carregarMotivos();
-  });
+function acimaDe10(estoque, estoqueMinimo) {
+  let porcentagemEstoque = estoqueMinimo * 0.1;
+  let corEstoque = document.getElementById("corEstoque");
+  console.log(porcentagemEstoque);
+  if (estoque > porcentagemEstoque) {
+    corEstoque.style.backgroundColor = "#00D222";
+  }
+  if (estoque < porcentagemEstoque) {
+    corEstoque.style.backgroundColor = "#FBF215";
+  }
+  if (estoque < estoqueMinimo) {
+    corEstoque.style.backgroundColor = "#92030C";
+  }
+}
 
-carregarCategorias();
+var divCorEstoque = document.getElementById("corEstoque");
+
+divCorEstoque.addEventListener("mouseover", function () {
+  document.querySelector(".modalEstoque").style.display = "block";
+});
+
+divCorEstoque.addEventListener("mouseout", function () {
+  document.querySelector(".modalEstoque").style.display = "none";
+});
