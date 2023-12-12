@@ -1,30 +1,8 @@
 carregarCategorias();
 
-document
-  .getElementById("NomeFuncionario")
-  .addEventListener("keyup", encontrarFuncionarios);
+let nomeElement = document.getElementById("NomeFuncionario");
 
-document.getElementById("NomeFuncionario").addEventListener("blur", () => {
-  searchResults.innerHTML = "";
-});
-
-function encontrarFuncionarios() {
-  let idDepartamento = document.getElementById("idDepartamento").value;
-  if (idDepartamento == "" || idDepartamento == null) {
-    exibirErro("idDepartamento", "Selecione um departamento");
-    return;
-  }
-
-  const nome = document.getElementById("NomeFuncionario").value;
-  console.log(nome);
-  const filtrarPorDepartamento = funcionarios.filter(
-    (func) => func.idDepartamento == idDepartamento
-  );
-  const results = filtrarPorDepartamento.filter((func) =>
-    func.Nome.toLowerCase().includes(nome.toLowerCase())
-  );
-  displayResults(results);
-}
+nomeElement.addEventListener("keyup", encontrarFuncionarios);
 
 document.getElementById("idDepartamento").addEventListener("change", () => {
   let idDepartamento = document.getElementById("idDepartamento").value;
@@ -32,6 +10,30 @@ document.getElementById("idDepartamento").addEventListener("change", () => {
     carregarDepartamento(idDepartamento);
   }
 });
+
+document.getElementById("NomeFuncionario").addEventListener("blur", () => {
+  searchResults.innerHTML = "";
+});
+
+function encontrarFuncionarios() {
+  console.log("passou aqui");
+  let idDepartamento = document.getElementById("idDepartamento").value;
+  if (idDepartamento == "" || idDepartamento == null) {
+    exibirErro("idDepartamento", "Selecione um departamento");
+    return;
+  }
+
+  let nome = document.getElementById("NomeFuncionario").value;
+  console.log(nome);
+  const filtrarPorDepartamento = funcionarios.filter(
+    (func) => func.idDepartamento == idDepartamento
+  );
+  const results = filtrarPorDepartamento.filter((func) =>
+    func.Nome.toLowerCase().includes(nome.toLowerCase())
+  );
+  console.log(results);
+  displayResults(results);
+}
 
 function carregarDepartamento(idDepartamento) {
   var inputDepartamento = document.getElementById("departamento");
@@ -57,10 +59,8 @@ function displayResults(results) {
     const li = document.createElement("li");
     li.classList.add("result-item");
     li.textContent = result.Nome;
-    console.log(result);
 
     li.addEventListener("click", () => {
-      console.log("aqui");
       document.getElementById("NomeFuncionario").value = result.Nome;
       document.getElementById("idFuncionario").value = result.idFuncionario;
       searchResults.innerHTML = "";
@@ -69,6 +69,8 @@ function displayResults(results) {
     searchResults.appendChild(li);
   });
 }
+
+// ----------------- CATEGORIAS E MOTIVOS ----------------- //
 
 function carregarCategorias() {
   const selectCategoria = document.getElementById("categoriaMotivo");
@@ -103,7 +105,7 @@ function carregarMotivos() {
   console.log(valorCategoria);
   console.log(motivosFiltrados);
 
-  getAllMotivos().forEach(function (motivo) {
+  motivosFiltrados.forEach(function (motivo) {
     let option = document.createElement("option");
     option.value = motivo.idMotivo;
     option.text = motivo.Descricao;
@@ -116,6 +118,8 @@ document
   .addEventListener("change", function () {
     carregarMotivos();
   });
+
+// ----------------- PRODUTOS ----------------- //
 
 document.getElementById("CodigoProduto").addEventListener("blur", function () {
   const idProduto = document.getElementById("CodigoProduto").value;
@@ -226,6 +230,7 @@ function atualizarTotal() {
   document.getElementById("totalItens").textContent = total;
 }
 
+// ----------------- REQUISIÇÃO ----------------- //
 function salvarRequisicao() {
   event.preventDefault();
 
