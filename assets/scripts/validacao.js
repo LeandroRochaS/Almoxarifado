@@ -1,17 +1,18 @@
 function validarFormulario() {
+  erros = 0;
   console.log("Validando formulário...");
   event.preventDefault();
 
-  const inputs = document.querySelectorAll("input");
+  const inputs = document.querySelectorAll("input[name='validated']");
 
   // Valida os campos obrigatórios
   inputs.forEach((input) => {
-    if (input.required || input.value == "") {
+    if (input.required || input.value == "" || input.value == null) {
       console.log("Campo obrigatório não preenchido: " + input.id);
       exibirErro(input.id, "Campo obrigatório");
+      erros++;
     } else {
       console.log("Campo obrigatório preenchido: " + input.id);
-
       ocultarErro(input.id);
     }
   });
@@ -23,6 +24,7 @@ function validarFormulario() {
     if (select.value == "" || select.value == 0 || select.value == -1) {
       console.log("select obrigatória não preenchida: " + select.id);
       exibirErro(select.id, "");
+      erros++;
     } else {
       console.log("select obrigatória preenchida: " + select.id);
 
@@ -30,21 +32,8 @@ function validarFormulario() {
     }
   });
 
-  // Valida os campos numéricos
-  const camposNumericos = ["CodigoProduto", "Estoque"];
-  camposNumericos.forEach((campo) => {
-    if (
-      document.getElementById(campo).value == "" ||
-      document.getElementById(campo).value == null
-    ) {
-      exibirErro(campo, "Valor inválido");
-    } else {
-      ocultarErro(campo);
-    }
-  });
-
-  console.log("Formulário validado com sucesso.");
-  salvar();
+  if (erros == 0) return true;
+  else return false;
 }
 
 function exibirErro(idElemento, mensagem) {

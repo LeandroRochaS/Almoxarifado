@@ -47,6 +47,20 @@ const produtos = [
     Preco: 10,
     EstoqueMinimo: 15,
   },
+  {
+    idProduto: 3,
+    Descricao: "Bala Fini",
+    Estoque: 10,
+    Preco: 3,
+    EstoqueMinimo: 15,
+  },
+  {
+    idProduto: 4,
+    Descricao: "Jujuba",
+    Estoque: 50,
+    Preco: 1,
+    EstoqueMinimo: 30,
+  },
 ];
 
 const funcionarios = [
@@ -139,24 +153,6 @@ const prioridade = [
   },
 ];
 
-const requisicoesProdutos = [
-  {
-    idRequisicao: 1,
-    idProduto: 1,
-    Quantidade: 2,
-  },
-  {
-    idRequisicao: 2,
-    idProduto: 2,
-    Quantidade: 1,
-  },
-  {
-    idRequisicao: 3,
-    idProduto: 3,
-    Quantidade: 3,
-  },
-];
-
 function getAllCategorias() {
   return categorias;
 }
@@ -169,6 +165,10 @@ function getAllRequisicoes() {
 // Função para obter todos os produtos
 function getAllProdutos() {
   return produtos;
+}
+
+function saidaDeProdutos(idProduto, quantidade) {
+  produtos[idProduto - 1].Estoque -= quantidade;
 }
 
 function getAllMotivos() {

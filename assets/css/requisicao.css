@@ -44,7 +44,7 @@
 }
 
 .camposPrincipais {
-  width: 95%;
+  width: 90%;
   margin: 0 auto;
   display: flex;
   margin-bottom: 3vh;
@@ -64,12 +64,13 @@
   flex-direction: column;
 }
 
-#searchResults {
+#search-results{
   list-style: none;
   position: absolute;
   margin-right: 5px;
-  top: 38.5%;
-  width: 20%;
+  top: 44%;
+  width: 9%;
+
 
 
   background: #fffeff;
@@ -148,6 +149,11 @@
 .dadosPrincipais {
   border: 1px solid #cdcdcd;
   border-radius: 8px;
+  
+}
+
+.dados-content {
+  width: 80%;
 }
 .titulo {
   margin-top: 10px;
@@ -315,14 +321,118 @@
   color: red;
   font-size: 12px;
   font-weight: 500;
+  
+}
+table {
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+tr, td {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #010152;
+}
+th {
+  background-color: #f7f7f7;
+  text-align: center;
+  font-weight: 700;
+}
+
+.excluir {
+  color: red;
+  cursor: pointer;
+}
+
+.codigo {
+  max-width: 3rem;
+}
+
+.descricao {
+  max-width: 15rem;
+}
+
+.qtd {
+  max-width: 5rem;
+}
+
+.un {
+  max-width: 4rem;
+}
+
+.preco {
+  max-width: 5px;
+}
+
+.total {
+  width: 100px;
+}
+
+.input-total {
+  width: 100px;
 }
 
 
-@media screen and (max-width: 600px) {
+
+@media screen and (max-width: 700px) {
+  .camposPrincipais {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .linhasCampos {
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .linhaAdicionarItens {
+    display: flex;
+  }
+
+  table {
+    width: 90%;
+    font-size: 0.6rem;
+  }
+  th, td {
+      padding: 5px;
+  }
+  .codigo, .descricao, .qtd, .un, .preco {
+    max-width: auto;
+  }
+  .total {
+    width: 50px;
+  }
+  
+}
+
+@media screen and (max-width: 400px) {
   .modalEstoque {
     width: 90%; /* Ajuste a largura para telas pequenas */
     max-width: 200px; /* Remova o tamanho máximo para telas pequenas */
-    top: 45%;
-    left: 47%;
+    top: 75%;
+    left: 30%;
   }
+
+  .main {
+    height: 100%;
+  }
+
+  #search-results{
+    top: 73%;
+    width: 40%;
+  }
+
+  
+  
 }
+
+

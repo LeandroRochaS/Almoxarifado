@@ -12,7 +12,17 @@ document.getElementById("idDepartamento").addEventListener("change", () => {
 });
 
 document.getElementById("NomeFuncionario").addEventListener("blur", () => {
-  searchResults.innerHTML = "";
+  setTimeout(() => {
+    document.getElementById("search-results").innerHTML = "";
+  }, 500);
+});
+
+document.querySelectorAll("input[data-isnumber='true']").forEach((input) => {
+  input.addEventListener("keypress", (event) => {
+    if (isNaN(event.key)) {
+      event.preventDefault();
+    }
+  });
 });
 
 function encontrarFuncionarios() {
@@ -51,7 +61,7 @@ function carregarDepartamento(idDepartamento) {
 }
 
 function displayResults(results) {
-  const searchResults = document.getElementById("searchResults");
+  const searchResults = document.getElementById("search-results");
   searchResults.innerHTML = "";
 
   // Exibir novos resultados
@@ -59,10 +69,11 @@ function displayResults(results) {
     const li = document.createElement("li");
     li.classList.add("result-item");
     li.textContent = result.Nome;
-
+    li.setAttribute("data-id", result.idFuncionario);
     li.addEventListener("click", () => {
       document.getElementById("NomeFuncionario").value = result.Nome;
       document.getElementById("idFuncionario").value = result.idFuncionario;
+      document.getElementById("cargo").value = result.Cargo;
       searchResults.innerHTML = "";
     });
 
@@ -162,11 +173,13 @@ divCorEstoque.addEventListener("mouseout", function () {
   document.querySelector(".modalEstoque").style.display = "none";
 });
 
-const itensDaSecao = [];
+let itensDaSecao = [];
 
 function adicionarProduto() {
   event.preventDefault();
+  console.log("clicou em adicionar produto");
   const idProduto = document.getElementById("CodigoProduto").value;
+
   const produtoFiltrado = produtos.find((p) => p.idProduto == idProduto);
 
   if (!produtoFiltrado) {
@@ -174,10 +187,24 @@ function adicionarProduto() {
     return;
   }
 
+  if (varificarSeExisteProduto(idProduto)) {
+    alert("Produto já adicionado");
+    return;
+  }
+
   const descricaoProduto = document.getElementById("DescricaoProduto").value;
-  const quantidade = document.getElementById("Estoque").value; // Suponho que você queira usar o campo Estoque
+  const quantidade = document.getElementById("Saida").value; // Suponho que você queira usar o campo Estoque
   const preco = produtoFiltrado.Preco;
   const total = quantidade * preco;
+
+  if (quantidade > produtoFiltrado.Estoque) {
+    alert("Quantidade maior que o estoque");
+    return;
+  }
+  if (quantidade <= 0) {
+    alert("Quantidade inválida");
+    return;
+  }
 
   const novoItem = {
     idProduto,
@@ -189,20 +216,20 @@ function adicionarProduto() {
 
   itensDaSecao.push(novoItem);
 
-  let tabelaCodigo = document.getElementById("tabelaCodigo");
-  let tabelaDescricao = document.getElementById("tabelaDescricao");
-  let tabelaQuantidade = document.getElementById("tabelaQuantidade");
-  let tabelaUnidade = document.getElementById("tabelaUnidade");
-  let tabelaPreco = document.getElementById("tabelaPreco");
-  let tabelaTotal = document.getElementById("tabelaTotal");
+  let tabela = document.getElementById("tabela-body");
 
-  // Criar elementos das novas divs
-  const divProduto = document.createElement("p");
-  const divDescricao = document.createElement("p");
-  const divQuantidade = document.createElement("p");
-  const divUnidade = document.createElement("p");
-  const divPreco = document.createElement("p");
-  const divTotal = document.createElement("p");
+  let linha = document.createElement("tr");
+
+  let divProduto = document.createElement("td");
+  let divDescricao = document.createElement("td");
+  divProduto.setAttribute("class", "codigo");
+  divDescricao.setAttribute("class", "descricao");
+  let divQuantidade = document.createElement("td");
+  let divUnidade = document.createElement("td");
+  let divPreco = document.createElement("td");
+  let divTotal = document.createElement("td");
+  let divExcluir = document.createElement("th");
+  divExcluir.setAttribute("class", "excluir");
 
   divProduto.textContent = idProduto;
   divDescricao.textContent = descricaoProduto;
@@ -210,29 +237,73 @@ function adicionarProduto() {
   divUnidade.textContent = `1`; // Substitua com a unidade real, se aplicável
   divPreco.textContent = preco;
   divTotal.textContent = total;
+  divExcluir.textContent = "X";
 
-  tabelaCodigo.appendChild(divProduto);
-  tabelaDescricao.appendChild(divDescricao);
-  tabelaQuantidade.appendChild(divQuantidade);
-  tabelaUnidade.appendChild(divUnidade);
-  tabelaPreco.appendChild(divPreco);
-  tabelaTotal.appendChild(divTotal);
+  linha.appendChild(divProduto);
+  linha.appendChild(divDescricao);
+  linha.appendChild(divQuantidade);
+  linha.appendChild(divUnidade);
+  linha.appendChild(divPreco);
+  linha.appendChild(divTotal);
+  linha.appendChild(divExcluir);
 
+  divExcluir.addEventListener("click", () => {
+    console.log(
+      "clicou em excluir " + itensDaSecao.map((i) => console.log(i.idProduto))
+    );
+    tabela.removeChild(linha);
+    removeItemDaSecao(idProduto, quantidade);
+    atualizarTotal();
+  });
+
+  tabela.appendChild(linha);
+
+  saidaDeProdutos(idProduto, quantidade);
+  limparCampoProduto();
   atualizarTotal();
+}
+
+function removeItemDaSecao(idProduto, quantidade) {
+  adicionaEstoqueProduto(idProduto, parseInt(quantidade));
+
+  itensDaSecao = itensDaSecao.filter((item) => item.idProduto != idProduto);
+}
+
+function limparCampoProduto() {
+  document.getElementById("CodigoProduto").value = "";
+  document.getElementById("DescricaoProduto").value = "";
+  document.getElementById("Estoque").value = "";
+  document.getElementById("Saida").value = "";
 }
 
 function atualizarTotal() {
   let total = 0;
 
-  for (const item of itensDaSecao) {
+  for (let item of itensDaSecao) {
     total += item.total;
   }
   document.getElementById("totalItens").textContent = total;
 }
 
+function varificarSeExisteProduto(idProduto) {
+  let existe = false;
+
+  for (const item of itensDaSecao) {
+    if (item.idProduto == idProduto) {
+      existe = true;
+    }
+  }
+  return existe;
+}
+
+function adicionaEstoqueProduto(idProduto, quantidade) {
+  produtos[idProduto - 1].Estoque += quantidade;
+}
+
 // ----------------- REQUISIÇÃO ----------------- //
 function salvarRequisicao() {
   event.preventDefault();
+  if (!validarFormulario()) return;
 
   const idMotivo = document.getElementById("Motivo").value;
   const motivoFiltrado = motivos.find((m) => m.idMotivo == idMotivo);
@@ -243,10 +314,6 @@ function salvarRequisicao() {
     (c) => c.idCategoria == idCategoria
   );
   console.log("passou ali");
-
-  const idProduto = document.getElementById("CodigoProduto").value;
-  const produtoFiltrado = produtos.find((p) => p.idProduto == idProduto);
-  console.log("passou cá");
 
   const idFuncionario = document.getElementById("idFuncionario").value;
   console.log(idFuncionario);
@@ -264,15 +331,16 @@ function salvarRequisicao() {
   const dataRequesicao = document.getElementById("dataRequesicao").value;
   console.log(dataRequesicao);
 
-  const nivelDePrioridade = document.querySelector(
+  const radioPrioridadeMarcado = document.querySelector(
     'input[name="prioridade"]:checked'
-  ).value;
-  console.log(nivelDePrioridade);
-  console.log(funcionarioFiltrado);
-  console.log(categoriaFiltrada);
-  console.log(motivoFiltrado);
-  console.log(nivelDePrioridade);
-  console.log(itensDaSecao);
+  );
+
+  if (itensDaSecao.length == 0) {
+    alert("Adicione pelo menos um produto");
+    return;
+  }
+
+  const nivelDePrioridade = radioPrioridadeMarcado.value;
 
   const novoPedido = {
     nmrRequisisao,
@@ -295,3 +363,27 @@ function cancelarRequisicao() {
   location.reload();
   alert("Pedido cancelado com sucesso!");
 }
+
+// ----------------- Responsive ----------------- //
+
+function responsiveTexts() {
+  var windowWidth = window.innerWidth;
+
+  var labelEstoque = document.querySelector(".label-estoque");
+  var labelDelete = document.getElementById("table-deletar");
+  var buttonAdicionar = document.getElementById("button-add");
+  console.log(windowWidth);
+
+  if (windowWidth < 700) {
+    labelEstoque.textContent = "Qtd.";
+    labelDelete.textContent = "X";
+    buttonAdicionar.textContent = "+";
+  } else {
+    labelEstoque.textContent = "Estoque";
+    labelDelete.textContent = "Deletar";
+    buttonAdicionar.textContent = "Adicionar";
+  }
+}
+
+window.addEventListener("DOMContentLoaded", responsiveTexts);
+window.addEventListener("resize", responsiveTexts);

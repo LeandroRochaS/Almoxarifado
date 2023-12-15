@@ -21,40 +21,39 @@
             <input type="number" id="inpNumero" />
           </div>
         <div class="dadosPrincipais">
-            <form  >
+            <form  class="dados-content" >
           
           <div class="camposPrincipais">
             <div class="camposPrincipaisLinha1 linhasCampos">
               <div class="grupo1 grupoInput">
                 <span>ID.</span>
-                <input type="number" id="idDepartamento" />
+                <input type="number" data-isnumber="true" name="validated" id="idDepartamento" />
               </div>
               <div class="grupo2 grupoInput">
                 <span>Departamento</span>
-                <input type="text" id="departamento" />
+                <input disabled type="text" name="validated" id="departamento" />
               </div>
               <div class="grupo3 grupoInput">
                 <span>Data</span>
-                <input type="date" id="dataRequesicao" />
+                <input  type="date" name="validated" id="dataRequesicao" />
               </div>
             </div>
             <div class="camposPrincipaisLinha2 linhasCampos">
               <div class="grupo4 grupoInput">
                 <span>ID Func.</span>
-                <input type="number" id="idFuncionario" />
+                <input disabled type="number" name="validated" id="idFuncionario" />
               </div>
               <div class="grupo5 grupoInput">
                 <span>Nome Funcionário</span>
-                <input autocomplete="off" type="text" id="NomeFuncionario" >
-                <ul id="searchResults"></ul>
-            <img class="lupa" src="/assets/img/image 2.png" alt="lupa">
+                <input autocomplete="off" type="text" name="validated" id="NomeFuncionario" >
+                <ul id="search-results"></ul>
               </input >
 
             
               </div>
               <div class="grupo6 grupoInput">
                 <span>Cargo</span>
-                <input type="text" id="cargo" />
+                <input disabled type="text" name="validated" id="cargo" />
               </div>
             </div>
             <div class="camposPrincipaisLinha3 linhasCampos">
@@ -72,6 +71,7 @@
                   <img class="btnAdd" src="/assets/img/add.svg" alt="" />
                 </div>
               </div>
+              <form >
               <div class="grupo9 grupoInput">
                 <span>Nível de Prioridade</span>
                 <div class="radioPrioridade">
@@ -81,29 +81,33 @@
                       type="radio"
                       name="prioridade"
                       id="urgente"
+                      value="urgente"
                     />
                     <span>Urgente</span>
                   </div>
-                  <div class="grupoPrioridade medio">
+                  <div class="grupoPrioridade ">
                     <input
-                      class="chkPrioridade"
+                      class="chkPrioridade medio"
                       type="radio"
                       name="prioridade"
                       id="medio"
+                      value="medio"
                     />
                     <span>Médio</span>
                   </div>
-                  <div class="grupoPrioridade baixo">
+                  <div class="grupoPrioridade ">
                     <input
-                      class="chkPrioridade"
+                      class="chkPrioridade baixo"
                       type="radio"
                       name="prioridade"
                       id="baixo"
+                      value="baixo"
                     />
                     <span>Baixo</span>
                   </div>
                 </div>
               </div>
+            </form>
             </div>
           </div>
         </div>
@@ -118,7 +122,7 @@
             <div class="linhaAdicionarItens">
               <div class="grupoProduto">
                 <span>Cod. Produto</span>
-                <input type="text" id="CodigoProduto" />
+                <input type="text" data-isnumber="true" id="CodigoProduto" />
 
               </div>
               <div class="grupoProdutoDescricao">
@@ -126,11 +130,16 @@
                 <input type="text" id="DescricaoProduto" />
               </div>
               <div class="grupoEstoque">
-                <span>Quantidade</span>
-                <input type="text" id="Estoque" />
+                <span class="label-estoque">Qnt.</span>
+                <input disabled type="text" id="Estoque" />
                 <div >  </div>
               </div>
-
+              <div class="grupoSaida">
+                <span>Saida</span>
+                <input type="text" id="Saida" />
+                <div >  </div>
+              </div>
+                
               <div class="grupoStatusEstoque">
                 <div>
                   <div id="corEstoque" ></div>
@@ -145,14 +154,14 @@
                     </div>
                     <div class="modalDiv">
                       <span class="quadrado modal-vermelho"></span>
-                      <p id="statusEstoqueMaximo" >Estoque abiaxo do Estoque mínimo</p>
+                      <p id="statusEstoqueMaximo" >Estoque abaixo do Estoque mínimo</p>
                       </div>
                   </div>
                 </div>
               </div>
               <div class="grupoBtnInserirItens">
                 <div class="BtnInserirItens">
-                  <button type="submit" onclick="adicionarProduto()">Adicionar</button>
+                  <button id="button-add" type="submit" onclick="adicionarProduto()">Adicionar</button>
                 </div>
 
               </div>
@@ -160,44 +169,24 @@
             </div>
             <div class="grupoProdutoError" >   </div>
             <div >
-              <div class="tabelaItens" >
-                <div class="box box-codigo">
-                    <p> Código </p>
-                    <div id="tabelaCodigo">
+              <table id="tabela">
+                <thead>
+                  <tr class="">
+                    <th>Código</th>
+                    <th>Descrição</th>
+                    <th>Qtd</th>
+                    <th>Un</th>
+                    <th>Preço</th>
+                    <th>Total</th>
+                    <th id="table-deletar">Deletar</th>
 
-                    </div>
-                </div>
-                <div class="box box-descricao">
-                    <p> Descrição </p>
-                    <div id="tabelaDescricao">
-                        
-                    </div>
-                </div>
-                <div class="box box-unidade">
-                    <p> Qtd </p>
-                    <div id="tabelaQuantidade">
-                        
-                    </div>
-                </div>
-                <div class="box box-unidade">
-                    <p> Un </p>
-                    <div id="tabelaUnidade">
-                        
-                    </div>
-                </div>
-                <div class="box box-prices">
-                    <p> Preço </p>
-                    <div id="tabelaPreco">
-                        
-                    </div>
-                </div>
-                <div  class="box box-prices">
-                    <p> Total </p>
-                    <div id="tabelaTotal">
-                        
-                    </div>
-                </div>
-              </div>
+                  </tr>
+                </thead>
+                <tbody id="tabela-body"> 
+                
+                  </tbody>
+                <tfoot>
+              </table>
               <div  class="box-total">
                 <p> Total </p>
                 <div class="box input-total">
@@ -216,8 +205,6 @@
           <div class="camposBtn">
             <div class="grupoBtn">
               <button  onclick="salvarRequisicao()">Salvar</button>
-            </div>
-            <div class="grupoBtn">
               <button  onclick="cancelarRequisicao()">Cancelar</button>
             </div>
           </div>
