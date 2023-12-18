@@ -1,11 +1,56 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Montserrat:wght@500;700;900&display=swap');
 * {
-  color: #000000;
   margin: 0;
   padding: 0;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter';}
+
+body {
+  background-color: #ffffff;
+
 }
+
+
+.listProdutos {
+  position: absolute;
+  z-index: 1;
+  height: 1500px;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  display: none;
+}
+
+#tabelaList {
+  margin-top: 10rem;
+  width: 90%;
+}
+
+.tabelaProdutos {
+  max-width: 500px;
+  width: 100%;
+}
+
+.btnProdutos {
+  border: 1px solid #ccc;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.btnProdutos:hover {
+  opacity: 0.5;
+}
+
+.titulo-produtos {
+  display: flex;
+  align-items: center;
+  gap: 10px
+  ;
+}
+
+
 
 .main {
   width: 100vw;
@@ -17,30 +62,36 @@
   justify-content: center;
 }
 .header {
-  max-width: 710px;
+  max-width: 90%;
   width: 100%;
   height: 5vh;
-  background-color: #15c7ff;
   display: flex;
   align-items: center;
+  justify-content: center;
   padding-left: 1vw;
   padding-right: 1vw;
   margin-bottom: 1.5vw;
+  border-radius: 7px;
+
+
 }
 .header span {
-  color: #ffffff;
+  color: #3A3C40;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
 }
 .conteudo {
-  /* background-color: yellow; */
   padding-top: 3vh;
   max-width: 710px;
   width: 90%;
   padding-left: 1vw;
   padding-right: 1vw;
-  border-color: #cdcdcd;
+  border-color: #3f0f3d49;
   border-radius: 20px;
   border-style: solid;
   flex-wrap: wrap;
+
 }
 
 .camposPrincipais {
@@ -51,13 +102,14 @@
   flex-wrap: wrap;
   flex-direction: column;
 }
+
 .linhasCampos {
   display: flex;
   flex-direction: row;
   margin-top: 1vh;
-  justify-content: space-between;
   align-items: center;
-  max-width: 680px;
+  
+
 }
 .grupoInput {
   display: flex;
@@ -73,7 +125,7 @@
 
 
 
-  background: #fffeff;
+  background: #e6e6e6;
 
   z-index: 1;
 
@@ -153,7 +205,7 @@
 }
 
 .dados-content {
-  width: 80%;
+  width: 100%;
 }
 .titulo {
   margin-top: 10px;
@@ -189,6 +241,7 @@
   flex-direction: row;
   align-items: end;
   padding: 2vh 0;
+  gap: 15px;
 }
 
 .modalEstoque {
@@ -200,7 +253,7 @@
   background: #f6f2ca;
   border-radius: 5px;
   border: 1px solid #fbf215;
-  top: 42%; 
+  top: 50%; 
   left: 53%; 
   box-sizing: border-box; /
 }
@@ -254,11 +307,13 @@
 
 .tabelaItens {
   margin-top: 10px;
-  width: 100%;
+  max-width: 90%;
   display: flex;
   margin: 20px 0;
   border: 1px solid #cdcdcd;
 }
+
+
 .tabelaItens .box-codigo {
   width: 100px;
   height: 100px;
@@ -325,8 +380,10 @@
 }
 table {
   border-collapse: collapse;
-  margin-bottom: 1rem;
   width: 100%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+
 }
 
 th,
@@ -334,12 +391,13 @@ td {
   padding: 10px;
   border: 1px solid #ccc;
   font-size: 0.9rem;
+  font-weight: 900;
 }
 
 tr, td {
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: #010152;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #3A3C40;
 }
 th {
   background-color: #f7f7f7;
@@ -380,6 +438,25 @@ th {
   width: 100px;
 }
 
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+}
+
+.footer h1 {
+  color: rgb(3, 3, 3);
+  font-size: 1rem;
+  padding-left: 10px;
+}
+
+.footer svg {
+  height: 50px;
+  width: 30px;
+  
+}
+
 
 
 @media screen and (max-width: 700px) {
@@ -399,11 +476,12 @@ th {
   }
 
   table {
-    width: 90%;
-    font-size: 0.6rem;
+    width: 100%;
+    font-size: 1rem;
   }
   th, td {
       padding: 5px;
+      font-size: 0.8rem;
   }
   .codigo, .descricao, .qtd, .un, .preco {
     max-width: auto;
@@ -411,27 +489,44 @@ th {
   .total {
     width: 50px;
   }
+
+  .titulo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+
+  }
+  
+  .grupo9 {
+    margin-left: 0 !important;
+  }
   
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 440px) {
   .modalEstoque {
     width: 90%; /* Ajuste a largura para telas pequenas */
     max-width: 200px; /* Remova o tamanho máximo para telas pequenas */
     top: 75%;
-    left: 30%;
+    left: 25%;
   }
+
+
+
 
   .main {
     height: 100%;
   }
 
   #search-results{
-    top: 73%;
+    top: 48%;
     width: 40%;
   }
 
-  
+
   
 }
 
