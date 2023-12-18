@@ -1,28 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Almoxarifado</title>
-    <link rel="stylesheet" href="/assets/css/requisicao.css" />
-    <link rel="stylesheet" href="/assets/css/inputRequisicao.css" />
-  </head>
-  <body>
-    <div class="menu"></div>
 
-    <div class="main">
-      <div class="header">
-        <span>Novo Pedido de Requisição</span>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Almoxarifado</title>
+  <link rel="stylesheet" href="/assets/css/requisicao.css" />
+  <link rel="stylesheet" href="/assets/css/inputRequisicao.css" />
+</head>
+
+<body>
+  <div class="menu"></div>
+
+  <div class="main">
+    <div class="listProdutos" id="listProdutos">
+      <table class="tabelaProdutos" id="tabelaList">
+        <thead>
+          <tr class="">
+            <p style="text-align: center; font-weight: 900;">LISTA DE PRODUTOS</p>
+
+            <th>Código</th>
+            <th>Descrição</th>
+            <th>Qtd</th>
+            <th>Un</th>
+            <th>Preço</th>
+            <th>Total</th>
+            <th id="fecharList" style="color: red;cursor: pointer;">Fechar</th>
+
+
+          </tr>
+        </thead>
+        <tbody id="tabela-list-body">
+
+        </tbody>
+        <tfoot>
+          <th>Total</th>
+          <th id="totalListGeral"></th>
+        </tfoot>
+
+
+      </table>
+
+    </div>
+    <div class="header">
+      <span>Novo Pedido de Requisição</span>
+    </div>
+
+    <div class="conteudo">
+      <div class="titulo">
+        <span>Dados Principais | Requisição Nº </span>
+        <input type="number" id="inpNumero" />
       </div>
-    
-      <div class="conteudo">
-        <div class="titulo">
-            <span>Dados Principais | Requisição Nº </span>
-            <input type="number" id="inpNumero" />
-          </div>
-        <div class="dadosPrincipais">
-            <form  class="dados-content" >
-          
+      <div class="dadosPrincipais">
+        <form class="dados-content">
+
           <div class="camposPrincipais">
             <div class="camposPrincipaisLinha1 linhasCampos">
               <div class="grupo1 grupoInput">
@@ -35,23 +66,23 @@
               </div>
               <div class="grupo3 grupoInput">
                 <span>Data</span>
-                <input  type="date" name="validated" id="dataRequesicao" />
+                <input type="date" name="validated" id="dataRequesicao" />
               </div>
             </div>
             <div class="camposPrincipaisLinha2 linhasCampos">
-              <div class="grupo4 grupoInput">
+              <div class="grupo1 grupoInput">
                 <span>ID Func.</span>
                 <input disabled type="number" name="validated" id="idFuncionario" />
               </div>
-              <div class="grupo5 grupoInput">
+              <div class="grupo2 grupoInput">
                 <span>Nome Funcionário</span>
-                <input autocomplete="off" type="text" name="validated" id="NomeFuncionario" >
+                <input autocomplete="off" type="text" name="validated" id="NomeFuncionario">
                 <ul id="search-results"></ul>
-              </input >
+                </input>
 
-            
+
               </div>
-              <div class="grupo6 grupoInput">
+              <div class="grupo3 grupoInput">
                 <span>Cargo</span>
                 <input disabled type="text" name="validated" id="cargo" />
               </div>
@@ -60,7 +91,7 @@
               <div class="grupo7 grupoInput">
                 <span>Categoria Motivo</span>
                 <div class="grupoCategoria">
-                  <select  id="categoriaMotivo"></select>
+                  <select id="categoriaMotivo"></select>
                   <img class="btnAdd" src="/assets/img/add.svg" alt="" />
                 </div>
               </div>
@@ -71,53 +102,41 @@
                   <img class="btnAdd" src="/assets/img/add.svg" alt="" />
                 </div>
               </div>
-              <form >
-              <div class="grupo9 grupoInput">
-                <span>Nível de Prioridade</span>
-                <div class="radioPrioridade">
-                  <div class="grupoPrioridade">
-                    <input
-                      class="chkPrioridade urgente"
-                      type="radio"
-                      name="prioridade"
-                      id="urgente"
-                      value="urgente"
-                    />
-                    <span>Urgente</span>
-                  </div>
-                  <div class="grupoPrioridade ">
-                    <input
-                      class="chkPrioridade medio"
-                      type="radio"
-                      name="prioridade"
-                      id="medio"
-                      value="medio"
-                    />
-                    <span>Médio</span>
-                  </div>
-                  <div class="grupoPrioridade ">
-                    <input
-                      class="chkPrioridade baixo"
-                      type="radio"
-                      name="prioridade"
-                      id="baixo"
-                      value="baixo"
-                    />
-                    <span>Baixo</span>
+              <form>
+                <div class="grupo9 grupoInput">
+                  <span>Nível de Prioridade</span>
+                  <div class="radioPrioridade">
+                    <div class="grupoPrioridade">
+                      <input class="chkPrioridade urgente" type="radio" name="prioridade" id="urgente"
+                        value="urgente" />
+                      <span>Urgente</span>
+                    </div>
+                    <div class="grupoPrioridade ">
+                      <input class="chkPrioridade medio" type="radio" name="prioridade" id="medio" value="medio" />
+                      <span>Médio</span>
+                    </div>
+                    <div class="grupoPrioridade ">
+                      <input class="chkPrioridade baixo" type="radio" name="prioridade" id="baixo" value="baixo" />
+                      <span>Baixo</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </form>
+              </form>
             </div>
           </div>
+      </div>
+      <div class="titulo">
+        <div class="titulo-produtos">
+          <span>Itens da Requisição </span>
+          <button class="btnProdutos" onclick="showListProducts()" id="btnProdutos">Produtos</button>´
+
         </div>
-          <div class="titulo">
-                <span>Itens da Requisição </span>
-              </div>
-        <div class="itensRequisicao">
-          
-        <div class="itens-container" >
-         
+
+      </div>
+      <div class="itensRequisicao">
+
+        <div class="itens-container">
+
           <div class="camposItens">
             <div class="linhaAdicionarItens">
               <div class="grupoProduto">
@@ -132,30 +151,30 @@
               <div class="grupoEstoque">
                 <span class="label-estoque">Qnt.</span>
                 <input disabled type="text" id="Estoque" />
-                <div >  </div>
+                <div> </div>
               </div>
               <div class="grupoSaida">
                 <span>Saida</span>
                 <input type="text" id="Saida" />
-                <div >  </div>
+                <div> </div>
               </div>
-                
+
               <div class="grupoStatusEstoque">
                 <div>
-                  <div id="corEstoque" ></div>
-                  <div class="modalEstoque" >
+                  <div id="corEstoque"></div>
+                  <div class="modalEstoque">
                     <div class="modalDiv">
                       <span class="quadrado modal-verde"></span>
-                      <p id="statusEstoque" >Estoque acima de 10% do Estoque mínimo</p>
+                      <p id="statusEstoque">Estoque acima de 10% do Estoque mínimo</p>
                     </div>
                     <div class="modalDiv">
                       <span class="quadrado modal-amarelo"></span>
-                      <p id="statusEstoqueMinimo" >Estoque abaixo de 10% do Estoque mínimo</p>
+                      <p id="statusEstoqueMinimo">Estoque abaixo de 10% do Estoque mínimo</p>
                     </div>
                     <div class="modalDiv">
                       <span class="quadrado modal-vermelho"></span>
-                      <p id="statusEstoqueMaximo" >Estoque abaixo do Estoque mínimo</p>
-                      </div>
+                      <p id="statusEstoqueMaximo">Estoque abaixo do Estoque mínimo</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -167,8 +186,8 @@
               </div>
 
             </div>
-            <div class="grupoProdutoError" >   </div>
-            <div >
+            <div class="grupoProdutoError"> </div>
+            <div>
               <table id="tabela">
                 <thead>
                   <tr class="">
@@ -182,43 +201,54 @@
 
                   </tr>
                 </thead>
-                <tbody id="tabela-body"> 
-                
-                  </tbody>
+                <tbody id="tabela-body">
+
+                </tbody>
                 <tfoot>
               </table>
-              <div  class="box-total">
+              <div class="box-total">
                 <p> Total </p>
                 <div class="box input-total">
                   <p id="totalItens"></p>
-                    
-                </div>
-            </div>
 
-             
+                </div>
+              </div>
+
+
 
             </div>
           </div>
         </div>
         <div>
           <div class="camposObservacao">
-          <div class="camposBtn">
-            <div class="grupoBtn">
-              <button  onclick="salvarRequisicao()">Salvar</button>
-              <button  onclick="cancelarRequisicao()">Cancelar</button>
+            <div class="camposBtn">
+              <div class="grupoBtn">
+                <button onclick="salvarRequisicao()" class="button-save">Salvar</button>
+                <button onclick="cancelarRequisicao()" class="button-cancel">Cancelar</button>
+              </div>
             </div>
           </div>
         </div>
-        </div>
 
-        </div>
       </div>
     </div>
+    <div class="footer">
+      <a href="https://github.com/LeandroRochaS" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+          height="24" viewBox="0 0 24 24">
+          <path
+            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+        </svg></a>
+      <h1>&copy; Leandro Rocha Santos</h1>
+    </div>
+  </div>
 
-</form>
-    <script src="/assets/scripts/data/dados.js"></script>
-    <script src="/assets/scripts/validacao.js"></script>
-    <script src="/assets/scripts/main.js"></script>
+  </form>
+  <script src="/assets/scripts/data/dados.js"></script>
+  <script src="/assets/scripts/modalProdutos.js"></script>
 
-  </body>
+  <script src="/assets/scripts/validacao.js"></script>
+  <script src="/assets/scripts/main.js"></script>
+
+</body>
+
 </html>
