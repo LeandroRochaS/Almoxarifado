@@ -26,7 +26,6 @@ document.querySelectorAll("input[data-isnumber='true']").forEach((input) => {
 });
 
 function encontrarFuncionarios() {
-  console.log("passou aqui");
   let idDepartamento = document.getElementById("idDepartamento").value;
   if (idDepartamento == "" || idDepartamento == null) {
     exibirErro("idDepartamento", "Selecione um departamento");
@@ -34,14 +33,12 @@ function encontrarFuncionarios() {
   }
 
   let nome = document.getElementById("NomeFuncionario").value;
-  console.log(nome);
   const filtrarPorDepartamento = funcionarios.filter(
     (func) => func.idDepartamento == idDepartamento
   );
   const results = filtrarPorDepartamento.filter((func) =>
     func.Nome.toLowerCase().includes(nome.toLowerCase())
   );
-  console.log(results);
   displayResults(results);
 }
 
@@ -56,7 +53,6 @@ function carregarDepartamento(idDepartamento) {
     return;
   }
   inputDepartamento.value = departamentoFiltrado[0].Descricao;
-  console.log(inputDepartamento.value);
   ocultarErro("idDepartamento");
 }
 
@@ -113,8 +109,6 @@ function carregarMotivos() {
   const motivosFiltrados = motivos.filter(
     (m) => m.idCategoria == valorCategoria.value
   );
-  console.log(valorCategoria);
-  console.log(motivosFiltrados);
 
   motivosFiltrados.forEach(function (motivo) {
     let option = document.createElement("option");
@@ -151,7 +145,6 @@ document.getElementById("CodigoProduto").addEventListener("blur", function () {
 function acimaDe10(estoque, estoqueMinimo) {
   let porcentagemEstoque = estoqueMinimo * 0.1;
   let corEstoque = document.getElementById("corEstoque");
-  console.log(porcentagemEstoque);
   if (estoque > porcentagemEstoque) {
     corEstoque.style.backgroundColor = "#00D222";
   }
@@ -177,7 +170,6 @@ let itensDaSecao = [];
 
 function adicionarProduto() {
   event.preventDefault();
-  console.log("clicou em adicionar produto");
   const idProduto = document.getElementById("CodigoProduto").value;
 
   const produtoFiltrado = produtos.find((p) => p.idProduto == idProduto);
@@ -248,9 +240,6 @@ function adicionarProduto() {
   linha.appendChild(divExcluir);
 
   divExcluir.addEventListener("click", () => {
-    console.log(
-      "clicou em excluir " + itensDaSecao.map((i) => console.log(i.idProduto))
-    );
     tabela.removeChild(linha);
     removeItemDaSecao(idProduto, quantidade);
     atualizarTotal();
@@ -307,29 +296,22 @@ function salvarRequisicao() {
 
   const idMotivo = document.getElementById("Motivo").value;
   const motivoFiltrado = motivos.find((m) => m.idMotivo == idMotivo);
-  console.log("passou aqui");
 
   const idCategoria = document.getElementById("categoriaMotivo").value;
   const categoriaFiltrada = categorias.find(
     (c) => c.idCategoria == idCategoria
   );
-  console.log("passou ali");
 
   const idFuncionario = document.getElementById("idFuncionario").value;
-  console.log(idFuncionario);
   const funcionarioFiltrado = funcionarios.find(
     (f) => f.idFuncionario == idFuncionario
   );
-  console.log("passou lá");
 
   const nmrRequisisao = document.getElementById("inpNumero").value;
-  console.log(nmrRequisisao);
 
   const idDepartamento = document.getElementById("idDepartamento").value;
-  console.log(idDepartamento);
 
   const dataRequesicao = document.getElementById("dataRequesicao").value;
-  console.log(dataRequesicao);
 
   const radioPrioridadeMarcado = document.querySelector(
     'input[name="prioridade"]:checked'
@@ -353,8 +335,10 @@ function salvarRequisicao() {
     itensDaSecao,
   };
 
-  console.log(novoPedido);
   alert("Pedido salvo com sucesso!");
+  setTimeout(() => {
+    location.reload();
+  }, 1300);
 }
 
 function cancelarRequisicao() {
@@ -372,7 +356,6 @@ function responsiveTexts() {
   var labelEstoque = document.querySelector(".label-estoque");
   var labelDelete = document.getElementById("table-deletar");
   var buttonAdicionar = document.getElementById("button-add");
-  console.log(windowWidth);
 
   if (windowWidth < 700) {
     labelEstoque.textContent = "Qtd.";
