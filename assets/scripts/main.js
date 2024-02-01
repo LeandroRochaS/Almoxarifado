@@ -116,15 +116,23 @@ function carregarMotivos() {
     option.text = motivo.Descricao;
     selectMotivo.add(option);
   });
+  document.getElementById("Motivo").disabled = false;
 }
 
-document
-  .getElementById("categoriaMotivo")
-  .addEventListener("change", function () {
-    carregarMotivos();
-  });
+let categoriaMotivoElement = document.getElementById("categoriaMotivo");
+
+categoriaMotivoElement.addEventListener("change", function () {
+  if (categoriaMotivoElement.value == "-1") {
+    document.getElementById("Motivo").disabled = true;
+    document.getElementById("Motivo").value = "";
+
+    return;
+  }
+  carregarMotivos();
+});
 
 // ----------------- PRODUTOS ----------------- //
+saideElement = document.getElementById("Saida");
 
 document.getElementById("CodigoProduto").addEventListener("blur", function () {
   const idProduto = document.getElementById("CodigoProduto").value;
@@ -133,6 +141,7 @@ document.getElementById("CodigoProduto").addEventListener("blur", function () {
   if (produtoFiltrado.length == 0) {
     document.getElementById("DescricaoProduto").value = "";
     document.getElementById("Estoque").value = "";
+    saideElement.disabled = true;
     return;
   }
   document.getElementById("DescricaoProduto").value =
@@ -140,9 +149,9 @@ document.getElementById("CodigoProduto").addEventListener("blur", function () {
   document.getElementById("Estoque").value = produtoFiltrado[0].Estoque;
 
   acimaDe10(produtoFiltrado[0].Estoque, produtoFiltrado[0].EstoqueMinimo);
+  saideElement.disabled = false;
 });
 
-saideElement = document.getElementById("Saida");
 saideElement.addEventListener("blur", function () {
   if (
     saideElement.value == 0 ||
@@ -263,6 +272,7 @@ function adicionarProduto() {
 
   saidaDeProdutos(idProduto, quantidade);
   limparCampoProduto();
+  saideElement.disabled = true;
   document.getElementById("BtnInserirItens").style.display = "none";
 
   atualizarTotal();
