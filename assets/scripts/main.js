@@ -163,12 +163,13 @@ saideElement.addEventListener("blur", function () {
   if (
     parseInt(document.getElementById("Estoque").value) >=
       parseInt(saideElement.value) &&
-    document.getElementById("Estoque").value != 0 &&
-    document.getElementById("Estoque").value != ""
+    parseInt(saideElement.value) != 0 &&
+    saideElement.value != ""
   ) {
     document.getElementById("BtnInserirItens").style.display = "flex";
     return;
   }
+
   document.getElementById("BtnInserirItens").style.display = "none";
 });
 
