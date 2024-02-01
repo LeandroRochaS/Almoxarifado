@@ -144,8 +144,6 @@ document.getElementById("CodigoProduto").addEventListener("blur", function () {
 
 saideElement = document.getElementById("Saida");
 saideElement.addEventListener("blur", function () {
-  console.log("opa");
-  console.log(saideElement.value);
   if (
     saideElement.value == 0 ||
     document.getElementById("Estoque").value < saideElement.value ||
