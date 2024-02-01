@@ -44,17 +44,17 @@ const produtos = [
   {
     idProduto: 2,
     Descricao: "Mel doce",
-    Estoque: 1,
+    Estoque: 8,
     Preco: 10,
-    EstoqueMinimo: 15,
+    EstoqueMinimo: 10,
     unidade: "Un",
   },
   {
     idProduto: 3,
     Descricao: "Bala Fini",
-    Estoque: 10,
+    Estoque: 9,
     Preco: 3,
-    EstoqueMinimo: 15,
+    EstoqueMinimo: 10,
     unidade: "Un",
   },
   {

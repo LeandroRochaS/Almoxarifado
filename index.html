@@ -49,7 +49,7 @@
     <div class="conteudo">
       <div class="titulo">
         <span>Dados Principais | Requisição Nº </span>
-        <input min="0" data-isnumber="true" type="number" id="inpNumero" />
+        <input min="0" class="greenInput" data-isnumber="true" type="number" id="inpNumero" />
       </div>
       <div class="dadosPrincipais">
         <form class="dados-content">
@@ -58,7 +58,8 @@
             <div class="camposPrincipaisLinha1 linhasCampos">
               <div class="grupo1 grupoInput">
                 <span>ID.</span>
-                <input type="number" min="0" data-isnumber="true" name="validated" id="idDepartamento" />
+                <input type="number" min="0" data-isnumber="true" name="validated" class="greenInput"
+                  id="idDepartamento" />
               </div>
               <div class="grupo2 grupoInput">
                 <span>Departamento</span>
@@ -72,11 +73,11 @@
             <div class="camposPrincipaisLinha2 linhasCampos">
               <div class="grupo1 grupoInput">
                 <span>ID Func.</span>
-                <input disabled type="number" name="validated" id="idFuncionario" />
+                <input type="number" name="validated" id="idFuncionario" class="greenInput" />
               </div>
               <div class="grupo2 grupoInput">
                 <span>Nome Funcionário</span>
-                <input autocomplete="off" type="text" name="validated" id="NomeFuncionario">
+                <input autocomplete="off" disabled type="text" id="NomeFuncionario">
                 <ul id="search-results"></ul>
                 </input>
 
@@ -105,7 +106,7 @@
               <form>
                 <div class="grupo9 grupoInput">
                   <span>Nível de Prioridade</span>
-                  <div class="radioPrioridade">
+                  <div id="check-null" class="radioPrioridade">
                     <div class="grupoPrioridade">
                       <input class="chkPrioridade urgente" type="radio" name="prioridade" id="urgente"
                         value="urgente" />
@@ -128,7 +129,7 @@
       <div class="titulo">
         <div class="titulo-produtos">
           <span>Itens da Requisição </span>
-          <button class="btnProdutos" onclick="showListProducts()" id="btnProdutos">Produtos</button>´
+          <button class="btnProdutos" onclick="showListProducts()" id="btnProdutos">Produtos</button>
 
         </div>
 
@@ -141,7 +142,7 @@
             <div class="linhaAdicionarItens">
               <div class="grupoProduto">
                 <span>Cod. Produto</span>
-                <input type="text" min="0" data-isnumber="true" id="CodigoProduto" />
+                <input type="text" min="0" data-isnumber="true" id="CodigoProduto" class="greenInput" />
 
               </div>
               <div class="grupoProdutoDescricao">
@@ -155,7 +156,7 @@
               </div>
               <div class="grupoSaida">
                 <span>Saida</span>
-                <input disabled data-isnumber="true" type="number" min="0" id="Saida" />
+                <input disabled data-isnumber="true" type="number" min="0" id="Saida" class="greenInput" />
                 <div> </div>
               </div>
 

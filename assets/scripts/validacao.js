@@ -17,10 +17,19 @@ function validarFormulario() {
     }
   });
 
+  const radioPrioridadeMarcado = document.querySelector(
+    'input[name="prioridade"]:checked'
+  );
+
+  if (radioPrioridadeMarcado == null) {
+    document.getElementById("check-null").style.border = "1px solid red";
+  } else {
+    document.getElementById("check-null").style.border = "1px solid  #e3e6eb";
+  }
+
   // Validar sections
   const selections = document.querySelectorAll("select");
   selections.forEach((select) => {
-    console.log(select.value);
     if (select.value == "" || select.value == 0 || select.value == -1) {
       exibirErro(select.id, "");
       erros++;
@@ -45,6 +54,10 @@ function exibirErro(idElemento, mensagem) {
     errorElement.id = idElemento + "Error";
 
     elemento.parentNode.appendChild(errorElement);
+
+    setTimeout(() => {
+      elemento.parentNode.removeChild(errorElement);
+    }, 5000);
   }
 
   errorElement.innerText = mensagem;

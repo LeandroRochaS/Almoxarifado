@@ -1,20 +1,22 @@
 carregarCategorias();
 
-let nomeElement = document.getElementById("NomeFuncionario");
-
-nomeElement.addEventListener("keyup", encontrarFuncionarios);
-
-document.getElementById("idDepartamento").addEventListener("change", () => {
-  let idDepartamento = document.getElementById("idDepartamento").value;
-  if (idDepartamento != "") {
-    carregarDepartamento(idDepartamento);
-  }
+document.querySelectorAll(".greenInput").forEach((input) => {
+  input.addEventListener("focus", () => {
+    input.style.border = "1px solid green";
+  });
+  input.addEventListener("focusout", () => {
+    input.style.border = "1px solid  #e3e6eb";
+  });
 });
 
-document.getElementById("NomeFuncionario").addEventListener("blur", () => {
-  setTimeout(() => {
-    document.getElementById("search-results").innerHTML = "";
-  }, 500);
+let nomeElement = document.getElementById("NomeFuncionario");
+var idDepartamentoElement = document.getElementById("idDepartamento");
+idDepartamentoElement.addEventListener("change", () => {
+  if (idDepartamentoElement.value != "" && idDepartamentoElement.value != 0) {
+    carregarDepartamento(idDepartamentoElement.value);
+  } else {
+    document.getElementById("departamento").value = "";
+  }
 });
 
 document.querySelectorAll("input[data-isnumber='true']").forEach((input) => {
@@ -25,22 +27,26 @@ document.querySelectorAll("input[data-isnumber='true']").forEach((input) => {
   });
 });
 
-function encontrarFuncionarios() {
-  let idDepartamento = document.getElementById("idDepartamento").value;
-  if (idDepartamento == "" || idDepartamento == null) {
-    exibirErro("idDepartamento", "Selecione um departamento");
+let idFuncionarioElement = document.getElementById("idFuncionario");
+idFuncionarioElement.addEventListener("blur", () => {
+  if (idFuncionarioElement.value == null || idFuncionarioElement == "") return;
+  const filtrarPorDepartamento = funcionarios.filter(
+    (func) => func.idDepartamento == idDepartamentoElement.value
+  );
+
+  const funcionario = filtrarPorDepartamento.find(
+    (x) => x.idFuncionario == idFuncionarioElement.value
+  );
+
+  if (!funcionario) {
+    document.getElementById("NomeFuncionario").value = "";
+    document.getElementById("cargo").value = "";
     return;
   }
 
-  let nome = document.getElementById("NomeFuncionario").value;
-  const filtrarPorDepartamento = funcionarios.filter(
-    (func) => func.idDepartamento == idDepartamento
-  );
-  const results = filtrarPorDepartamento.filter((func) =>
-    func.Nome.toLowerCase().includes(nome.toLowerCase())
-  );
-  displayResults(results);
-}
+  document.getElementById("NomeFuncionario").value = funcionario.Nome;
+  document.getElementById("cargo").value = funcionario.Cargo;
+});
 
 function carregarDepartamento(idDepartamento) {
   var inputDepartamento = document.getElementById("departamento");
@@ -124,6 +130,7 @@ let categoriaMotivoElement = document.getElementById("categoriaMotivo");
 categoriaMotivoElement.addEventListener("change", function () {
   if (categoriaMotivoElement.value == "-1") {
     document.getElementById("Motivo").disabled = true;
+
     document.getElementById("Motivo").value = "";
 
     return;
@@ -167,12 +174,17 @@ saideElement.addEventListener("blur", function () {
 
 function acimaDe10(estoque, estoqueMinimo) {
   let porcentagemEstoque = estoqueMinimo * 0.1;
+
   let corEstoque = document.getElementById("corEstoque");
   if (estoque > porcentagemEstoque) {
     corEstoque.style.backgroundColor = "#00D222";
   }
-  if (estoque < porcentagemEstoque) {
+  if (
+    estoque >= estoqueMinimo - porcentagemEstoque &&
+    estoque < estoqueMinimo
+  ) {
     corEstoque.style.backgroundColor = "#FBF215";
+    return;
   }
   if (estoque < estoqueMinimo) {
     corEstoque.style.backgroundColor = "#92030C";

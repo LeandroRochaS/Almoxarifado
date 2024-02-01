@@ -5,9 +5,11 @@ select {
   gap: 10px;
   border-radius: 8px;
   border: 1px solid var(--Grey-200, #e3e6eb);
+  outline: none;
 }
 
-input[disabled] {
+input[disabled],
+select[disabled] {
   background-color: #f7f7f7;
   color: black;
 }
