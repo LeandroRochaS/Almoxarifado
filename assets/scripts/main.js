@@ -162,7 +162,9 @@ document.getElementById("CodigoProduto").addEventListener("blur", function () {
 saideElement.addEventListener("blur", function () {
   if (
     parseInt(document.getElementById("Estoque").value) >=
-    parseInt(saideElement.value)
+      parseInt(saideElement.value) &&
+    document.getElementById("Estoque").value != 0 &&
+    document.getElementById("Estoque").value != ""
   ) {
     document.getElementById("BtnInserirItens").style.display = "flex";
     return;
