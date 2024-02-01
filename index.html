@@ -49,7 +49,7 @@
     <div class="conteudo">
       <div class="titulo">
         <span>Dados Principais | Requisição Nº </span>
-        <input type="number" id="inpNumero" />
+        <input min="0" data-isnumber="true" type="number" id="inpNumero" />
       </div>
       <div class="dadosPrincipais">
         <form class="dados-content">
@@ -58,7 +58,7 @@
             <div class="camposPrincipaisLinha1 linhasCampos">
               <div class="grupo1 grupoInput">
                 <span>ID.</span>
-                <input type="number" data-isnumber="true" name="validated" id="idDepartamento" />
+                <input type="number" min="0" data-isnumber="true" name="validated" id="idDepartamento" />
               </div>
               <div class="grupo2 grupoInput">
                 <span>Departamento</span>
@@ -141,7 +141,7 @@
             <div class="linhaAdicionarItens">
               <div class="grupoProduto">
                 <span>Cod. Produto</span>
-                <input type="text" data-isnumber="true" id="CodigoProduto" />
+                <input type="text" min="0" data-isnumber="true" id="CodigoProduto" />
 
               </div>
               <div class="grupoProdutoDescricao">
@@ -155,7 +155,7 @@
               </div>
               <div class="grupoSaida">
                 <span>Saida</span>
-                <input type="text" id="Saida" />
+                <input data-isnumber="true" type="number" min="0" id="Saida" />
                 <div> </div>
               </div>
 
@@ -179,7 +179,7 @@
                 </div>
               </div>
               <div class="grupoBtnInserirItens">
-                <div class="BtnInserirItens">
+                <div class="BtnInserirItens" id="BtnInserirItens">
                   <button id="button-add" type="submit" onclick="adicionarProduto()">Adicionar</button>
                 </div>
 

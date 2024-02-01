@@ -19,7 +19,7 @@ document.getElementById("NomeFuncionario").addEventListener("blur", () => {
 
 document.querySelectorAll("input[data-isnumber='true']").forEach((input) => {
   input.addEventListener("keypress", (event) => {
-    if (isNaN(event.key)) {
+    if (isNaN(event.key) || event.key < 0) {
       event.preventDefault();
     }
   });
@@ -142,6 +142,22 @@ document.getElementById("CodigoProduto").addEventListener("blur", function () {
   acimaDe10(produtoFiltrado[0].Estoque, produtoFiltrado[0].EstoqueMinimo);
 });
 
+saideElement = document.getElementById("Saida");
+saideElement.addEventListener("blur", function () {
+  console.log("opa");
+  console.log(saideElement.value);
+  if (
+    saideElement.value == 0 ||
+    document.getElementById("Estoque").value < saideElement.value ||
+    saideElement.value == ""
+  ) {
+    document.getElementById("BtnInserirItens").style.display = "none";
+    return;
+  }
+
+  document.getElementById("BtnInserirItens").style.display = "flex";
+});
+
 function acimaDe10(estoque, estoqueMinimo) {
   let porcentagemEstoque = estoqueMinimo * 0.1;
   let corEstoque = document.getElementById("corEstoque");
@@ -249,6 +265,8 @@ function adicionarProduto() {
 
   saidaDeProdutos(idProduto, quantidade);
   limparCampoProduto();
+  document.getElementById("BtnInserirItens").style.display = "none";
+
   atualizarTotal();
 }
 
