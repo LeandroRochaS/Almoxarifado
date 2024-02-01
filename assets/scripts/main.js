@@ -161,15 +161,13 @@ document.getElementById("CodigoProduto").addEventListener("blur", function () {
 
 saideElement.addEventListener("blur", function () {
   if (
-    saideElement.value == 0 ||
-    document.getElementById("Estoque").value < saideElement.value ||
-    saideElement.value == ""
+    parseInt(document.getElementById("Estoque").value) >=
+    parseInt(saideElement.value)
   ) {
-    document.getElementById("BtnInserirItens").style.display = "none";
+    document.getElementById("BtnInserirItens").style.display = "flex";
     return;
   }
-
-  document.getElementById("BtnInserirItens").style.display = "flex";
+  document.getElementById("BtnInserirItens").style.display = "none";
 });
 
 function acimaDe10(estoque, estoqueMinimo) {
