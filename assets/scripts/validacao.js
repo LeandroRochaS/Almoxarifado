@@ -22,11 +22,11 @@ function validarFormulario() {
   );
 
   if (radioPrioridadeMarcado == null) {
-    document.getElementById("check-null").style.border = "1px solid red";
+    document.querySelector(".radioPrioridade").style.background = "red";
   } else {
-    document.getElementById("check-null").style.border = "1px solid  #e3e6eb";
+    document.querySelector(".radioPrioridade").style.background =
+      "rgba(214, 214, 214, 0.21)";
   }
-
   // Validar sections
   const selections = document.querySelectorAll("select");
   selections.forEach((select) => {
@@ -44,7 +44,7 @@ function validarFormulario() {
 
 function exibirErro(idElemento, mensagem) {
   const elemento = document.getElementById(idElemento);
-  elemento.style.border = "1px solid red";
+  elemento.style.background = "#e30000";
 
   // Adiciona ou atualiza uma mensagem de erro
   let errorElement = document.getElementById(idElemento + "Error");
@@ -65,7 +65,7 @@ function exibirErro(idElemento, mensagem) {
 
 function ocultarErro(idElemento) {
   const elemento = document.getElementById(idElemento);
-  elemento.style.border = "1px solid #ccc";
+  elemento.style.background = "rgba(214, 214, 214, 0.21)";
 
   // Remove a mensagem de erro se existir
   let errorElement = document.getElementById(idElemento + "Error");
