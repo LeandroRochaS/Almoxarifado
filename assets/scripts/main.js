@@ -148,6 +148,7 @@ document.getElementById("CodigoProduto").addEventListener("blur", function () {
   if (produtoFiltrado.length == 0) {
     document.getElementById("DescricaoProduto").value = "";
     document.getElementById("Estoque").value = "";
+    saideElement.value = "";
     saideElement.disabled = true;
     return;
   }
@@ -156,7 +157,9 @@ document.getElementById("CodigoProduto").addEventListener("blur", function () {
   document.getElementById("Estoque").value = produtoFiltrado[0].Estoque;
 
   acimaDe10(produtoFiltrado[0].Estoque, produtoFiltrado[0].EstoqueMinimo);
-  saideElement.disabled = false;
+  if (produtoFiltrado[0].Estoque != 0) {
+    saideElement.disabled = false;
+  }
 });
 
 saideElement.addEventListener("blur", function () {
@@ -175,14 +178,15 @@ saideElement.addEventListener("blur", function () {
 
 function acimaDe10(estoque, estoqueMinimo) {
   let porcentagemEstoque = estoqueMinimo * 0.1;
+  console.log(estoqueMinimo + "aqui " + porcentagemEstoque);
 
   let corEstoque = document.getElementById("corEstoque");
-  if (estoque > porcentagemEstoque) {
+  if (estoque >= estoqueMinimo + porcentagemEstoque) {
     corEstoque.style.backgroundColor = "#00D222";
   }
   if (
-    estoque >= estoqueMinimo - porcentagemEstoque &&
-    estoque < estoqueMinimo
+    estoque < estoqueMinimo + porcentagemEstoque &&
+    estoque >= estoqueMinimo
   ) {
     corEstoque.style.backgroundColor = "#FBF215";
     return;

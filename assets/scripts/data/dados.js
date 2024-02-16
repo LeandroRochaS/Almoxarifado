@@ -68,9 +68,9 @@ const produtos = [
   {
     idProduto: 5,
     Descricao: "Lápis HB",
-    Estoque: 25,
+    Estoque: 13,
     Preco: 2,
-    EstoqueMinimo: 10,
+    EstoqueMinimo: 12,
     unidade: "Un",
   },
   {
